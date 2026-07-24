@@ -22,7 +22,6 @@ const projectsData = {
     coverImage: "d8x cove.png",
     gallery: [],
     video: [
-      // "d8x cove.png",
       "d8x-01.mp4",
       "https://placehold.co/800x600/1a1a1a/ffffff?text=D8X+Motion+Frame+2"
     ],
