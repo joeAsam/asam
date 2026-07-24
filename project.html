@@ -172,42 +172,53 @@
       tagsContainer.appendChild(span);
     });
 
-    // Gallery
-    const galleryContainer = document.getElementById('project-gallery');
-    project.gallery.forEach((img, index) => {
-      const div = document.createElement('div');
-      div.className = 'project-gallery-item';
-      if (index === 0) div.className += ' project-gallery-large';
-      const imgEl = document.createElement('img');
-      imgEl.src = img;
-      imgEl.alt = `${project.title} - Image ${index + 1}`;
-      div.appendChild(imgEl);
-      galleryContainer.appendChild(div);
-    });
+  // Gallery
+    const galleryContainer = document.getElementById("project-gallery");
 
-    // Video
-    const videoContainer = document.getElementById('project-video');
-// console.log(project.video);
-      project.video.forEach((vid, index) => {
-        const div = document.createElement('div');
-        div.className = 'project-video-item';
+    if (project.gallery) {
+      project.gallery.forEach((img, index) => {
+        const div = document.createElement("div");
+        div.className = "project-gallery-item";
 
         if (index === 0) {
-          div.classList.add('project-video-large');
+          div.classList.add("project-gallery-large");
         }
 
-        const videoEl = document.createElement('video');
+        const imgEl = document.createElement("img");
+        imgEl.src = img;
+        imgEl.alt = `${project.title} - Image ${index + 1}`;
+
+        div.appendChild(imgEl);
+        galleryContainer.appendChild(div);
+      });
+    } else {
+      galleryContainer.style.display = "none";
+    }
+
+    // Video
+    const videoContainer = document.getElementById("project-video");
+
+    if (project.video) {
+      project.video.forEach((vid, index) => {
+        const div = document.createElement("div");
+        div.className = "project-video-item";
+
+        if (index === 0) {
+          div.classList.add("project-video-large");
+        }
+
+        const videoEl = document.createElement("video");
         videoEl.src = vid;
         videoEl.controls = true;
-        videoEl.preload = 'metadata';
-        videoEl.setAttribute(
-          'aria-label',
-          `${project.title} - Video ${index + 1}`
-        );
+        videoEl.preload = "metadata";
+        videoEl.style.width = "100%";
 
         div.appendChild(videoEl);
         videoContainer.appendChild(div);
       });
+    } else {
+      videoContainer.style.display = "none";
+    }
 
     // Technologies
     const techContainer = document.getElementById('tech-badges');
