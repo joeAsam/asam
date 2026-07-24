@@ -1106,7 +1106,7 @@ img {
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   outline: none;
-  transition: border-color .3s, box-shadow .3s, color:#fff
+  transition: border-color .3s, box-shadow .3s; color: #fff;
 }
 
 .form-group input::placeholder,
