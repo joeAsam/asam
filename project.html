@@ -2610,6 +2610,107 @@
       }
     });
   </script>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox-close" id="lightbox-close" aria-label="Close">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M18 6L6 18M6 6l12 12" />
+      </svg>
+    </button>
+    <button class="lightbox-prev" id="lightbox-prev" aria-label="Previous image">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M15 18l-6-6 6-6" />
+      </svg>
+    </button>
+    <button class="lightbox-next" id="lightbox-next" aria-label="Next image">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M9 18l6-6-6-6" />
+      </svg>
+    </button>
+    <div class="lightbox-content">
+      <img id="lightbox-img" src="" alt="" />
+    </div>
+    <div class="lightbox-counter" id="lightbox-counter"></div>
+  </div>
+
+  <script>
+    // Lightbox functionality
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const lightboxClose = document.getElementById('lightbox-close');
+    const lightboxPrev = document.getElementById('lightbox-prev');
+    const lightboxNext = document.getElementById('lightbox-next');
+    const lightboxCounter = document.getElementById('lightbox-counter');
+    let currentLightboxIndex = 0;
+    let lightboxImages = [];
+
+    function openLightbox(images, index) {
+      lightboxImages = images;
+      currentLightboxIndex = index;
+      updateLightboxImage();
+      lightbox.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    function updateLightboxImage() {
+      lightboxImg.src = lightboxImages[currentLightboxIndex];
+      lightboxImg.alt = `Image ${currentLightboxIndex + 1}`;
+      lightboxCounter.textContent = `${currentLightboxIndex + 1} / ${lightboxImages.length}`;
+      lightboxPrev.style.display = lightboxImages.length > 1 ? 'flex' : 'none';
+      lightboxNext.style.display = lightboxImages.length > 1 ? 'flex' : 'none';
+    }
+
+    function nextLightboxImage() {
+      currentLightboxIndex = (currentLightboxIndex + 1) % lightboxImages.length;
+      updateLightboxImage();
+    }
+
+    function prevLightboxImage() {
+      currentLightboxIndex = (currentLightboxIndex - 1 + lightboxImages.length) % lightboxImages.length;
+      updateLightboxImage();
+    }
+
+    lightboxClose.addEventListener('click', closeLightbox);
+    lightboxNext.addEventListener('click', nextLightboxImage);
+    lightboxPrev.addEventListener('click', prevLightboxImage);
+
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox || e.target.classList.contains('lightbox-content')) {
+        closeLightbox();
+      }
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (!lightbox.classList.contains('active')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowRight') nextLightboxImage();
+      if (e.key === 'ArrowLeft') prevLightboxImage();
+    });
+
+    // Attach click handlers to gallery images
+    function initGalleryLightbox() {
+      const galleryItems = document.querySelectorAll('.project-gallery-item');
+      const images = [];
+      galleryItems.forEach(item => {
+        const img = item.querySelector('img');
+        if (img) images.push(img.src);
+      });
+
+      galleryItems.forEach((item, index) => {
+        item.style.cursor = 'zoom-in';
+        item.addEventListener('click', () => openLightbox(images, index));
+      });
+    }
+
+    // Wait for gallery to render then init
+    setTimeout(initGalleryLightbox, 100);
+  </script>
 </body>
 
 </html>

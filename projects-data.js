@@ -23,7 +23,7 @@ const projectsData = {
     gallery: [],
     video: [
       "d8x-01.mp4",
-      "https://placehold.co/800x600/1a1a1a/ffffff?text=D8X+Motion+Frame+2"
+      "d8x-02.mp4"
     ],
     description: "Dynamic motion graphics for perps trading platform, creating engaging visual content for social media presence.",
     challenge: "D8X Exchange needed dynamic motion graphics to showcase their perpetual futures trading platform on social media. The crypto space is highly competitive, and they needed content that would stand out and communicate complex trading concepts simply.",
@@ -36,9 +36,11 @@ const projectsData = {
     tags: ["Social Media", "Content"],
     coverImage: "360-cover.png",
     gallery: [
-      "360-cover.png",
-      "https://placehold.co/800x600/1a1a1a/ffffff?text=3Sixty+Social+Post+1",
-      "https://placehold.co/800x600/1a1a1a/ffffff?text=3Sixty+Social+Post+2"
+      "src/img/360/360-JULY-HNM.png",
+      "src/img/360/360-JUNE-DAY 03.png",
+      "src/img/360/360-JUNE-DAY 09.png",
+      "src/img/360/360-JUNE-DAY 30.png",
+      "src/img/360/360-JUNE-SLIDES-COOKING-06.png"
     ],
     video: [],
     description: "Social media content strategy and design system for a premium tech solutions brand, establishing consistent visual identity across platforms.",
