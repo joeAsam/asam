@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Project — Joseph Asam</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400..800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <div class="cursor" id="cursor">
+    <div class="cursor-dot"></div>
+  </div>
+  <div class="cursor-follower" id="cursor-follower"></div>
+  <div class="noise-overlay"></div>
+
+  <header class="nav" id="nav">
+    <a href="index.html" class="nav-logo magnetic" data-strength="2"><img src="me-logo.png" alt="" width="50px"></a>
+    <nav class="nav-links" id="nav-links">
+      <a href="index.html#work" class="nav-link magnetic" data-strength="20">Work</a>
+      <a href="index.html#about" class="nav-link magnetic" data-strength="20">About</a>
+      <a href="index.html#services" class="nav-link magnetic" data-strength="20">Services</a>
+      <a href="index.html#contact" class="nav-link magnetic" data-strength="20">Contact</a>
+    </nav>
+    <button class="nav-hamburger" id="nav-hamburger" aria-label="Toggle menu">
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+    </button>
+  </header>
+
+  <div class="mobile-menu" id="mobile-menu">
+    <div class="mobile-menu-inner">
+      <a href="index.html#work" class="mobile-link">Work</a>
+      <a href="index.html#about" class="mobile-link">About</a>
+      <a href="index.html#services" class="mobile-link">Services</a>
+      <a href="index.html#contact" class="mobile-link">Contact</a>
+      <div class="mobile-menu-footer">
+        <a href="mailto:joeasam2.00@gmail.com">joeasam2.00@gmail.com</a>
+        <div class="mobile-socials">
+          <a href="https://x.com/asam_onchain/" target="_blank">Twitter</a>
+          <a href="https://www.instagram.com/asam.onchain/" target="_blank">Instagram</a>
+          <a href="https://www.behance.net/joeasam1" target="_blank">Behance</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="side-text side-text-left">CREATIVE DESIGNER</div>
+  <div class="side-text side-text-right">PORTFOLIO — 2026</div>
+
+  <main class="project-detail">
+    <div class="project-detail-inner">
+      <a href="index.html#work" class="project-back-link magnetic anim-reveal" data-strength="10">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M19 12H5M12 19l-7-7 7-7" />
+        </svg>
+        <span>Back to Work</span>
+      </a>
+
+      <div class="project-detail-hero anim-reveal">
+        <img id="project-cover" src="" alt="" />
+      </div>
+
+      <div class="project-detail-content">
+        <div class="project-detail-header anim-reveal">
+          <h1 class="project-detail-title" id="project-title"></h1>
+          <div class="project-detail-tags" id="project-tags"></div>
+        </div>
+
+        <p class="project-detail-description anim-reveal" id="project-description"></p>
+
+        <div class="project-gallery anim-reveal" id="project-gallery"></div>
+
+        <div class="case-study anim-reveal">
+          <h2 class="case-study-heading">Case Study</h2>
+
+          <div class="case-study-section">
+            <h3 class="case-study-subheading">The Challenge</h3>
+            <p id="case-challenge"></p>
+          </div>
+
+          <div class="case-study-section">
+            <h3 class="case-study-subheading">The Solution</h3>
+            <p id="case-solution"></p>
+          </div>
+
+          <div class="case-study-section">
+            <h3 class="case-study-subheading">The Outcome</h3>
+            <p id="case-outcome"></p>
+          </div>
+        </div>
+
+        <div class="project-tech anim-reveal">
+          <h3 class="project-tech-heading">Technologies & Tools</h3>
+          <div class="tech-badges" id="tech-badges"></div>
+        </div>
+
+        <div class="project-nav anim-reveal">
+          <a href="#" class="project-nav-link project-nav-prev" id="prev-project">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M19 12H5M12 19l-7-7 7-7" />
+            </svg>
+            <span class="project-nav-label">Previous Project</span>
+            <span class="project-nav-title" id="prev-project-title"></span>
+          </a>
+          <a href="#" class="project-nav-link project-nav-next" id="next-project">
+            <span class="project-nav-label">Next Project</span>
+            <span class="project-nav-title" id="next-project-title"></span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-left">
+        <span class="footer-logo magnetic" data-strength="25"><img src="me-logo.png" alt=""></span>
+      </div>
+      <div class="footer-center">
+        <p>&copy;  MMXXVI · Joseph Asam · All rights reserved</p>
+      </div>
+      <div class="footer-right">
+        <a href="#hero" class="back-to-top magnetic" data-strength="20">
+          <span>Back to top</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 19V5M5 12l7-7 7 7" />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="projects-data.js"></script>
+  <script>
+    // Parse URL parameters
+    const urlParams = new URLSearchParams(window.location.search);
+    const projectId = urlParams.get('id');
+
+    // Get project data
+    const project = projectsData[projectId];
+
+    if (!project) {
+      window.location.href = 'index.html';
+    }
+
+    // Populate page
+    document.title = `${project.title} — Joseph Asam`;
+
+    document.getElementById('project-cover').src = project.coverImage;
+    document.getElementById('project-cover').alt = project.title;
+    document.getElementById('project-title').textContent = project.title;
+    document.getElementById('project-description').textContent = project.description;
+    document.getElementById('case-challenge').textContent = project.challenge;
+    document.getElementById('case-solution').textContent = project.solution;
+    document.getElementById('case-outcome').textContent = project.outcome;
+
+    // Tags
+    const tagsContainer = document.getElementById('project-tags');
+    project.tags.forEach(tag => {
+      const span = document.createElement('span');
+      span.textContent = tag;
+      tagsContainer.appendChild(span);
+    });
+
+    // Gallery
+    const galleryContainer = document.getElementById('project-gallery');
+    project.gallery.forEach((img, index) => {
+      const div = document.createElement('div');
+      div.className = 'project-gallery-item';
+      if (index === 0) div.className += ' project-gallery-large';
+      const imgEl = document.createElement('img');
+      imgEl.src = img;
+      imgEl.alt = `${project.title} - Image ${index + 1}`;
+      div.appendChild(imgEl);
+      galleryContainer.appendChild(div);
+    });
+
+    // Technologies
+    const techContainer = document.getElementById('tech-badges');
+    project.technologies.forEach(tech => {
+      const span = document.createElement('span');
+      span.className = 'tech-badge';
+      span.textContent = tech;
+      techContainer.appendChild(span);
+    });
+
+    // Navigation
+    const currentIndex = projectOrder.indexOf(projectId);
+    const prevIndex = (currentIndex - 1 + projectOrder.length) % projectOrder.length;
+    const nextIndex = (currentIndex + 1) % projectOrder.length;
+
+    const prevProject = projectsData[projectOrder[prevIndex]];
+    const nextProject = projectsData[projectOrder[nextIndex]];
+
+    document.getElementById('prev-project').href = `project.html?id=${projectOrder[prevIndex]}`;
+    document.getElementById('next-project').href = `project.html?id=${projectOrder[nextIndex]}`;
+    document.getElementById('prev-project-title').textContent = prevProject.title;
+    document.getElementById('next-project-title').textContent = nextProject.title;
+
+    // CUSTOM CURSOR
+    const cursor = document.getElementById('cursor');
+    const follower = document.getElementById('cursor-follower');
+    let mouseX = 0, mouseY = 0;
+    let followerX = 0, followerY = 0;
+
+    document.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      cursor.style.left = mouseX + 'px';
+      cursor.style.top = mouseY + 'px';
+    });
+
+    function animateCursor() {
+      followerX += (mouseX - followerX) * 0.12;
+      followerY += (mouseY - followerY) * 0.12;
+      follower.style.left = followerX + 'px';
+      follower.style.top = followerY + 'px';
+      requestAnimationFrame(animateCursor);
+    }
+    animateCursor();
+
+    const hoverElements = document.querySelectorAll('a, button, .magnetic');
+    hoverElements.forEach(el => {
+      el.addEventListener('mouseenter', () => {
+        cursor.classList.add('hover');
+        follower.classList.add('hover');
+      });
+      el.addEventListener('mouseleave', () => {
+        cursor.classList.remove('hover');
+        follower.classList.remove('hover');
+      });
+    });
+
+    // MAGNETIC EFFECT
+    const magneticElements = document.querySelectorAll('.magnetic');
+    magneticElements.forEach(el => {
+      const strength = parseInt(el.dataset.strength) || 25;
+      el.addEventListener('mousemove', (e) => {
+        const rect = el.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width / 2;
+        const y = e.clientY - rect.top - rect.height / 2;
+        el.style.transform = `translate(${x * strength / 80}px, ${y * strength / 80}px)`;
+      });
+      el.addEventListener('mouseleave', () => {
+        el.style.transform = 'translate(0, 0)';
+        el.style.transition = 'transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)';
+        setTimeout(() => { el.style.transition = ''; }, 600);
+      });
+    });
+
+    // SCROLL REVEAL
+    function initAnimations() {
+      const revealElements = document.querySelectorAll('.anim-reveal');
+      const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+      revealElements.forEach(el => revealObserver.observe(el));
+    }
+    initAnimations();
+
+    // NAV SCROLL EFFECT
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        nav.classList.add('scrolled');
+      } else {
+        nav.classList.remove('scrolled');
+      }
+    });
+
+    // MOBILE MENU
+    const hamburger = document.getElementById('nav-hamburger');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const mobileLinks = document.querySelectorAll('.mobile-link');
+
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('active');
+      mobileMenu.classList.toggle('active');
+      document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+    });
+
+    mobileLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('active');
+        mobileMenu.classList.remove('active');
+        document.body.style.overflow = '';
+      });
+    });
+
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 768) {
+        hamburger.classList.remove('active');
+        mobileMenu.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    });
+  </script>
+</body>
+
+</html>
