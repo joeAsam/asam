@@ -5,8 +5,9 @@ const projectsData = {
     coverImage: "Mbolingo-BRAND GUIDE-cover.png",
     gallery: [
       "Mbolingo-BRAND GUIDE-cover.png",
-      "https://placehold.co/800x600/1a1a1a/ffffff?text=Mbolingo+Brand+Elements",
-      "https://placehold.co/800x600/1a1a1a/ffffff?text=Mbolingo+Stationery"
+      "src/img/mbolingo/Mb-pre.png",
+      "src/img/mbolingo/Mbolingo-cards.png",
+      "src/img/mbolingo/Mbolingo-main.png"
     ], 
     video: [],
     description: "Complete brand overhaul including logo, stationery, and brand guidelines for a luxury wellness company based in Lagos, Nigeria.",
@@ -54,9 +55,11 @@ const projectsData = {
     tags: ["Logo", "Branding"],
     coverImage: "https://placehold.co/800x600/0a0a0a/ffffff?text=SolarRock+Technologies",
     gallery: [
-      "https://placehold.co/800x600/0a0a0a/ffffff?text=SolarRock+Cover",
-      "https://placehold.co/800x600/1a1a1a/ffffff?text=SolarRock+Logo+Design",
-      "https://placehold.co/800x600/1a1a1a/ffffff?text=SolarRock+Social+Media"
+      "src/img/solarrock/SOLARROCK-JUNE-WEEK-03 01.png",
+      "src/img/solarrock/SOLARROCK-JULY-HNM.png",
+      "src/img/solarrock/SOLARROCK-JULY-WEEK-01 04.png",
+      "src/img/solarrock/SOLARROCK-JULY-WEEK-03 03.png",
+      "src/img/solarrock/SOLARROCK-JULY-WEEK-03 01.png"
     ],
     video: [],
     description: "Social media flyer campaign and brand identity design for SolarRock Technologies, an AI and data analytics company.",
@@ -68,11 +71,13 @@ const projectsData = {
   "logofolio": {
     title: "Logofolio",
     tags: ["Logo Design", "Graphics"],
-    coverImage: "https://placehold.co/1200x800/111111/ffffff?text=Logofolio+Collection",
+    coverImage: "src/img/logo/logofolio.png",
     gallery: [
-      "https://placehold.co/800x600/111111/ffffff?text=Logofolio+Collection+1",
-      "https://placehold.co/800x600/1a1a1a/ffffff?text=Logofolio+Collection+2",
-      "https://placehold.co/800x600/1a1a1a/ffffff?text=Logofolio+Collection+3"
+      "src/img/logo/BINGHAM-uni tech abstract BG.png",
+      "src/img/logo/Zentre-Payroll-CARD-2-FRONT.png",
+      "src/img/logo/Mbolingo-main.png",
+      "src/img/logo/Judisen-logo-2.png",
+      "src/img/logo/Celeste's Place-LOGO-02.png"
     ],
     video: [],
     description: "A curated collection of logo designs showcasing versatility across different industries, styles, and visual approaches.",
