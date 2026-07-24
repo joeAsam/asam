@@ -13,7 +13,7 @@ const projectsData = {
     challenge: "Mbolingo Central needed a complete brand overhaul to establish themselves as a luxury wellness destination. The existing visual identity lacked cohesion and failed to communicate the premium nature of their services.",
     solution: "Developed a sophisticated visual identity system featuring a geometric logo mark inspired by interconnected wellness paths, a premium gold and black color palette, and comprehensive brand guidelines covering all touchpoints from digital to print.",
     outcome: "The rebrand successfully positioned Mbolingo as a premium wellness brand, resulting in increased brand recognition, higher client engagement across all platforms, and a cohesive visual presence that communicates luxury and sophistication.",
-    technologies: ["Illustrator", "Photoshop", "InDesign"]
+    technologies: ["Corel Draw", "Photoshop", "Illustrator"]
   },
 
   "d8x": {
@@ -45,7 +45,7 @@ const projectsData = {
     challenge: "3Sixty Ace needed a cohesive social media content strategy to establish their brand presence in the competitive tech solutions market. They required a system that could scale while maintaining visual consistency.",
     solution: "Designed a comprehensive content system including social media templates, post designs, story formats, and brand collateral. Created a modular design system that allowed for easy content creation while maintaining visual harmony across all touchpoints.",
     outcome: "The unified visual strategy increased brand recognition and engagement rates across Instagram, Twitter, and LinkedIn. The template system reduced content creation time by 40% while maintaining professional quality.",
-    technologies: ["Photoshop", "Illustrator", "Figma"]
+    technologies: ["Photoshop", "Corel Draw", "Illustrator"]
   },
   "solarrock": {
     title: "SolarRock Technologies",
