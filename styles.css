@@ -1588,6 +1588,38 @@ img {
   aspect-ratio: 21/10
 }
 
+
+
+.project-video {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  margin-bottom: 80px
+}
+
+.project-video-item {
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  aspect-ratio: 16/10
+}
+
+.project-video-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 1s var(--ease-out-expo)
+}
+
+.project-video-item:hover img {
+  transform: scale(1.05)
+}
+
+.project-video-large {
+  grid-column: span 2;
+  aspect-ratio: 21/10
+}
+
 .case-study {
   margin-bottom: 80px;
   padding: 48px;
