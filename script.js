@@ -122,19 +122,21 @@ const hamburger = document.getElementById('nav-hamburger');
 const mobileMenu = document.getElementById('mobile-menu');
 const mobileLinks = document.querySelectorAll('.mobile-link');
 
-hamburger.addEventListener('click', () => {
-  hamburger.classList.toggle('active');
-  mobileMenu.classList.toggle('active');
-  document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
-});
-
-mobileLinks.forEach(link => {
-  link.addEventListener('click', () => {
-    hamburger.classList.remove('active');
-    mobileMenu.classList.remove('active');
-    document.body.style.overflow = '';
+if (hamburger) {
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('active');
+    mobileMenu.classList.toggle('active');
+    document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
   });
-});
+
+  mobileLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      hamburger.classList.remove('active');
+      mobileMenu.classList.remove('active');
+      document.body.style.overflow = '';
+    });
+  });
+}
 
 // SMOOTH SCROLL
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -232,8 +234,41 @@ initHeroAnimation();
 // CLOSE MOBILE MENU ON RESIZE
 window.addEventListener('resize', () => {
   if (window.innerWidth > 768) {
-    hamburger.classList.remove('active');
-    mobileMenu.classList.remove('active');
+    if (hamburger) hamburger.classList.remove('active');
+    if (mobileMenu) mobileMenu.classList.remove('active');
     document.body.style.overflow = '';
   }
 });
+
+// MOBILE ICON NAV - Active Section Tracking
+const mobileIconNav = document.getElementById('mobile-icon-nav');
+if (mobileIconNav) {
+  const iconLinks = mobileIconNav.querySelectorAll('.mobile-icon-link');
+  const sectionIds = Array.from(iconLinks).map(link => {
+    const href = link.getAttribute('href');
+    return href.includes('#') ? href.split('#')[1] : null;
+  }).filter(Boolean);
+
+  function updateActiveIcon() {
+    let currentSection = 'hero';
+    for (let i = sectionIds.length - 1; i >= 0; i--) {
+      const el = document.getElementById(sectionIds[i]);
+      if (el && el.getBoundingClientRect().top <= 120) {
+        currentSection = sectionIds[i];
+        break;
+      }
+    }
+    iconLinks.forEach(link => {
+      const href = link.getAttribute('href');
+      const section = href.includes('#') ? href.split('#')[1] : null;
+      if (section === currentSection) {
+        link.classList.add('active');
+      } else {
+        link.classList.remove('active');
+      }
+    });
+  }
+
+  window.addEventListener('scroll', updateActiveIcon, { passive: true });
+  updateActiveIcon();
+}
