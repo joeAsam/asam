@@ -583,86 +583,31 @@
 
   <!-- JOEBOT MASCOT -->
   <div class="joubot-wrapper" id="joubot" role="complementary" aria-label="JoeBot assistant">
-    <div class="joubot-speech" id="joubot-speech" aria-live="polite">
-      <span class="joubot-speech-text" id="joubot-speech-text"></span>
-      <button class="joubot-speech-close" id="joubot-speech-close" aria-label="Dismiss">&times;</button>
-    </div>
+
     <div class="joubot-character" id="joubot-character">
-      <div class="joubot-glow"></div>
-      <div class="joubot-body-group">
-        <div class="joubot-antenna">
-          <div class="joubot-antenna-stem"></div>
-          <div class="joubot-antenna-tip"></div>
-        </div>
-        <div class="joubot-head">
-          <div class="joubot-helmet">
-            <div class="joubot-helmet-shine"></div>
-          </div>
-          <div class="joubot-visor">
-            <div class="joubot-visor-glare"></div>
-            <div class="joubot-face">
-              <div class="joubot-eyes">
-                <div class="joubot-eye joubot-eye-l" id="joubot-eye-l">
-                  <div class="joubot-pupil" id="joubot-pupil-l"></div>
-                  <div class="joubot-eye-shine"></div>
-                </div>
-                <div class="joubot-eye joubot-eye-r" id="joubot-eye-r">
-                  <div class="joubot-pupil" id="joubot-pupil-r"></div>
-                  <div class="joubot-eye-shine"></div>
-                </div>
-              </div>
-              <div class="joubot-mouth" id="joubot-mouth"></div>
-            </div>
-          </div>
-          <div class="joubot-ear joubot-ear-l"></div>
-          <div class="joubot-ear joubot-ear-r"></div>
-        </div>
-        <div class="joubot-neck"></div>
-        <div class="joubot-torso">
-          <div class="joubot-chest-light"></div>
-          <div class="joubot-chest-detail"></div>
-        </div>
-        <div class="joubot-arm joubot-arm-l" id="joubot-arm-l">
-          <div class="joubot-arm-upper"></div>
-          <div class="joubot-arm-joint"></div>
-          <div class="joubot-arm-lower"></div>
-          <div class="joubot-hand" id="joubot-hand-l"></div>
-        </div>
-        <div class="joubot-arm joubot-arm-r" id="joubot-arm-r">
-          <div class="joubot-arm-upper"></div>
-          <div class="joubot-arm-joint"></div>
-          <div class="joubot-arm-lower"></div>
-          <div class="joubot-hand" id="joubot-hand-r"></div>
-        </div>
-        <div class="joubot-leg joubot-leg-l">
-          <div class="joubot-leg-upper"></div>
-          <div class="joubot-leg-joint"></div>
-          <div class="joubot-leg-lower"></div>
-          <div class="joubot-boot"></div>
-        </div>
-        <div class="joubot-leg joubot-leg-r">
-          <div class="joubot-leg-upper"></div>
-          <div class="joubot-leg-joint"></div>
-          <div class="joubot-leg-lower"></div>
-          <div class="joubot-boot"></div>
-        </div>
-      </div>
+
+      <div id="speech"></div>
+      <div id="pet" class="sprite"></div>
+      
       <div class="joubot-shadow"></div>
     </div>
+
+    
     <div class="joubot-zzz" id="joubot-zzz">
       <span>z</span><span>z</span><span>z</span>
     </div>
+  
   </div>
 
   <!-- JOEBOT CHAT BUTTON -->
-  <button class="joubot-chat-btn" id="joubot-chat-btn" aria-label="Open JoeBot chat">
+  <button class="joubot-chat-btn" id="chat-toggle" aria-label="Open JoeBot chat">
     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
       <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
     </svg>
   </button>
 
   <!-- JOEBOT CHAT PANEL -->
-  <div class="joubot-chat-panel" id="joubot-chat-panel">
+  <div class="joubot-chat-panel" id="chat-panel">
     <div class="joubot-chat-header">
       <div class="joubot-chat-header-info">
         <div class="joubot-chat-avatar">JB</div>
@@ -673,7 +618,7 @@
       </div>
       <button class="joubot-chat-close" id="joubot-chat-close" aria-label="Close chat">&times;</button>
     </div>
-    <div class="joubot-chat-messages" id="joubot-chat-messages"></div>
+    <div class="joubot-chat-messages" id="chat-messages"></div>
     <div class="joubot-chat-suggestions" id="joubot-chat-suggestions">
       <button class="joubot-suggestion" data-query="Who is Joe?">Who is Joe?</button>
       <button class="joubot-suggestion" data-query="Show branding projects">Branding work</button>
@@ -685,8 +630,8 @@
       <button class="joubot-suggestion" data-query="Contact Joe">Contact</button>
     </div>
     <div class="joubot-chat-input-area">
-      <input type="text" class="joubot-chat-input" id="joubot-chat-input" placeholder="Ask me anything..." aria-label="Chat input"/>
-      <button class="joubot-chat-send" id="joubot-chat-send" aria-label="Send message">
+      <input type="text" class="joubot-chat-input" id="chat-input" placeholder="Ask me anything..." aria-label="Chat input"/>
+      <button class="joubot-chat-send" id="chat-send" aria-label="Send message">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/>
         </svg>
@@ -694,8 +639,12 @@
     </div>
   </div>
 
-  <!-- JOEBOT PROGRESS DOTS -->
   <script src="script.js"></script>
+  <script src="joubot/config.js"></script>
+  <script src="joubot/sprite.js"></script>
+  <script src="joubot/speech.js"></script>
+  <script src="joubot/brain.js"></script>
+  <script src="joubot/events.js"></script>
   <script src="joubot/joubot.js"></script>
 </body>
 

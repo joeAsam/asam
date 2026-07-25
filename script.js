@@ -138,16 +138,91 @@ if (hamburger) {
   });
 }
 
-// SMOOTH SCROLL
+// SMOOTH SCROLL WITH HEAVY EASE-OUT
+var scrollState = {
+  targetY: 0,
+  animating: false,
+  startTime: null,
+  startY: 0,
+  duration: 1000
+};
+
+function easeOutCubic(t) {
+  return 1 - Math.pow(1 - t, 3);
+}
+
+function smoothScrollTo(targetY, duration) {
+  duration = duration || 1000;
+  scrollState.startY = window.scrollY;
+  scrollState.targetY = targetY;
+  scrollState.startTime = null;
+  scrollState.duration = duration;
+
+  if (!scrollState.animating) {
+    scrollState.animating = true;
+    requestAnimationFrame(animateScroll);
+  }
+}
+
+function animateScroll(timestamp) {
+  if (!scrollState.startTime) scrollState.startTime = timestamp;
+  var elapsed = timestamp - scrollState.startTime;
+  var progress = Math.min(elapsed / scrollState.duration, 1);
+  var ease = easeOutCubic(progress);
+  var newY = scrollState.startY + (scrollState.targetY - scrollState.startY) * ease;
+  window.scrollTo(0, newY);
+
+  if (progress < 1) {
+    requestAnimationFrame(animateScroll);
+  } else {
+    scrollState.animating = false;
+  }
+}
+
+// Wheel smooth scroll
+var wheelAccumulator = 0;
+var wheelTimer = null;
+
+document.addEventListener('wheel', function(e) {
+  e.preventDefault();
+  var delta = e.deltaY;
+  var maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+  var current = window.scrollY;
+
+  wheelAccumulator += delta;
+  clearTimeout(wheelTimer);
+  wheelTimer = setTimeout(function() { wheelAccumulator = 0; }, 80);
+
+  var target = current + wheelAccumulator * 1.5;
+  target = Math.max(0, Math.min(target, maxScroll));
+  smoothScrollTo(target, 900);
+}, { passive: false });
+
+// Touch smooth scroll
+var touchStartY = 0;
+document.addEventListener('touchstart', function(e) {
+  touchStartY = e.touches[0].clientY;
+}, { passive: true });
+
+document.addEventListener('touchmove', function(e) {
+  var touchY = e.touches[0].clientY;
+  var delta = touchStartY - touchY;
+  touchStartY = touchY;
+  var maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+  var target = Math.max(0, Math.min(window.scrollY + delta * 2.5, maxScroll));
+  smoothScrollTo(target, 700);
+}, { passive: true });
+
+// Nav link smooth scroll
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   anchor.addEventListener('click', function(e) {
     e.preventDefault();
-    const href = this.getAttribute('href');
-    const target = document.querySelector(href);
+    var href = this.getAttribute('href');
+    var target = document.querySelector(href);
     if (target) {
-      const offset = 80;
-      const top = target.getBoundingClientRect().top + window.scrollY - offset;
-      window.scrollTo({ top, behavior: 'smooth' });
+      var offset = 80;
+      var top = target.getBoundingClientRect().top + window.scrollY - offset;
+      smoothScrollTo(top, 1200);
     }
   });
 });

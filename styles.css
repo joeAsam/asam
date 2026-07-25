@@ -26,7 +26,6 @@
 }
 
 html {
-  scroll-behavior: smooth;
   scrollbar-width: thin;
   scrollbar-color: #333 #0a0a0a
 }
@@ -1311,8 +1310,8 @@ img {
 /* ANIMATIONS */
 .anim-reveal {
   opacity: 0;
-  transform: translateY(40px);
-  transition: opacity .8s var(--ease-out-expo), transform .8s var(--ease-out-expo)
+  transform: translateY(50px);
+  transition: opacity 1.4s var(--ease-out-expo), transform 1.4s var(--ease-out-expo)
 }
 
 .anim-reveal.visible {
@@ -1321,44 +1320,44 @@ img {
 }
 
 .projects-grid .project-card:nth-child(1) {
-  transition-delay: .05s
+  transition-delay: .08s
 }
 
 .projects-grid .project-card:nth-child(2) {
-  transition-delay: .1s
+  transition-delay: .16s
 }
 
 .projects-grid .project-card:nth-child(3) {
-  transition-delay: .15s
+  transition-delay: .24s
 }
 
 .projects-grid .project-card:nth-child(4) {
-  transition-delay: .2s
+  transition-delay: .32s
 }
 
 .projects-grid .project-card:nth-child(5) {
-  transition-delay: .25s
+  transition-delay: .4s
 }
 
 .services-grid .service-card:nth-child(1) {
-  transition-delay: .05s
+  transition-delay: .08s
 }
 
 .services-grid .service-card:nth-child(2) {
-  transition-delay: .1s
+  transition-delay: .16s
 }
 
 .services-grid .service-card:nth-child(3) {
-  transition-delay: .15s
+  transition-delay: .24s
 }
 
 .services-grid .service-card:nth-child(4) {
-  transition-delay: .2s
+  transition-delay: .32s
 }
 
 .section {
   opacity: 0;
-  transition: opacity .6s
+  transition: opacity 1s var(--ease-out-expo)
 }
 
 .section.visible {
@@ -2378,7 +2377,7 @@ img {
   height: 44px;
   border-radius: 12px;
   color: #737373;
-  transition: all .3s var(--ease-out-expo)
+  transition: color .4s var(--ease-out-expo), background .4s var(--ease-out-expo), transform .3s var(--ease-out-expo)
 }
 
 .mobile-icon-link:hover,
@@ -2564,9 +2563,10 @@ img {
 }
 
 /* ============================================
-   JOEBOT MASCOT
+   JOEBOT — Sprite Mascot
    ============================================ */
 
+/* Wrapper — draggable container */
 .joubot-wrapper {
   position: fixed;
   z-index: 998;
@@ -2579,438 +2579,87 @@ img {
 }
 
 .joubot-wrapper.dragging {
-  cursor: grabbing;
-  transition: none
+  cursor: grabbing
 }
 
-.joubot-wrapper.dragging .joubot-character {
-  animation-play-state: paused !important
+/* Character — holds the sprite + shadow */
+.joubot-character {
+  position: relative;
+  width: 192px;
+  height: 208px;
+  transform-origin: center center;
+  transition: transform .005s linear;
+  transform: scale(0.55);
 }
 
-/* SPEECH BUBBLE */
-.joubot-speech {
+/* The Sprite.js element */
+.joubot-character .sprite {
   position: absolute;
-  bottom: calc(100% + 14px);
+  bottom: 0;
   left: 0;
-  background: rgba(20, 20, 20, 0.92);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 14px;
-  padding: 10px 14px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  white-space: nowrap;
-  opacity: 0;
-  transform: translateY(8px);
-  transition: opacity .35s, transform .35s;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-  pointer-events: none;
-  max-width: 260px
+  transform-origin: bottom center;
+  transition: transform 0.012s ease-out
 }
 
-.joubot-speech.visible {
+/* Shadow under the character */
+.joubot-shadow {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 10px;
+  background: radial-gradient(ellipse, rgba(0, 0, 0, 0.25) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: shadowPulse 3s ease-in-out infinite
+}
+
+@keyframes shadowPulse {
+  0%, 100% { transform: translateX(-50%) scaleX(1); opacity: 0.45 }
+  50% { transform: translateX(-50%) scaleX(0.7); opacity: 0.2 }
+}
+
+/* ============================================
+   SPEECH BUBBLE
+   ============================================ */
+#speech {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%) translateY(6px);
+  background: rgba(18, 18, 18, 0.92);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 12px;
+  padding: 9px 13px;
+  font-size: 22px;
+  color: rgba(255, 255, 255, 0.85);
+  letter-spacing: 0.3px;
+  line-height: 1.4;
+  white-space: nowrap;
+  overflow: visible;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .3s, transform .3s;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.4);
+  z-index: 10;
+  z-index: 1000;
+}
+
+/* #speech.visible {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+  pointer-events: auto
+} */
+
+#speech.visible {
   opacity: 1;
   transform: translateY(0);
   pointer-events: auto
 }
 
-.joubot-speech.fade-out {
-  opacity: 0;
-  transform: translateY(-4px)
-}
-
-.joubot-speech-text {
-  font-size: 12px;
-  color: rgba(255, 255, 255, 0.85);
-  letter-spacing: 0.3px;
-  line-height: 1.4
-}
-
-.joubot-speech-close {
-  background: none;
-  border: none;
-  color: rgba(255, 255, 255, 0.35);
-  font-size: 15px;
-  cursor: pointer;
-  padding: 0 2px;
-  line-height: 1;
-  transition: color .2s;
-  flex-shrink: 0
-}
-
-.joubot-speech-close:hover {
-  color: #fff
-}
-
-/* CHARACTER */
-.joubot-character {
-  position: relative;
-  width: 90px;
-  height: 140px;
-  animation: joubotFloat 4s ease-in-out infinite
-}
-
-.joubot-body-group {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  transition: transform .15s ease-out;
-  transform-origin: center bottom
-}
-
-@keyframes joubotFloat {
-  0%, 100% { transform: translateY(0) }
-  50% { transform: translateY(-6px) }
-}
-
-/* GLOW */
-.joubot-glow {
-  position: absolute;
-  bottom: -8px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 60px;
-  height: 20px;
-  background: radial-gradient(ellipse, rgba(232, 93, 58, 0.15) 0%, transparent 70%);
-  border-radius: 50%;
-  pointer-events: none;
-  transition: opacity .3s
-}
-
-/* ANTENNA */
-.joubot-antenna {
-  position: absolute;
-  top: -4px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  z-index: 5
-}
-
-.joubot-antenna-stem {
-  width: 2px;
-  height: 10px;
-  background: rgba(232, 232, 232, 0.3)
-}
-
-.joubot-antenna-tip {
-  width: 8px;
-  height: 8px;
-  background: var(--accent);
-  border-radius: 50%;
-  box-shadow: 0 0 8px rgba(232, 232, 232, 0.4);
-  animation: antennaPulse 2s ease-in-out infinite
-}
-
-@keyframes antennaPulse {
-  0%, 100% { box-shadow: 0 0 4px rgba(232, 232, 232, 0.3); transform: scale(1) }
-  50% { box-shadow: 0 0 12px rgba(232, 232, 232, 0.6); transform: scale(1.1) }
-}
-
-/* HEAD */
-.joubot-head {
-  position: absolute;
-  top: 8px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 52px;
-  height: 52px;
-  z-index: 4
-}
-
-.joubot-helmet {
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
-  border-radius: 50%;
-  position: relative;
-  border: 1.5px solid rgba(255, 255, 255, 0.08);
-  box-shadow:
-    inset 0 -3px 6px rgba(0, 0, 0, 0.3),
-    0 4px 12px rgba(0, 0, 0, 0.3)
-}
-
-.joubot-helmet-shine {
-  position: absolute;
-  top: 7px;
-  left: 10px;
-  width: 16px;
-  height: 10px;
-  background: rgba(255, 255, 255, 0.08);
-  border-radius: 50%;
-  transform: rotate(-20deg)
-}
-
-/* VISOR */
-.joubot-visor {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 36px;
-  height: 26px;
-  background: #f5f5f5;
-  border-radius: 14px;
-  overflow: hidden
-}
-
-.joubot-visor-glare {
-  position: absolute;
-  top: 3px;
-  left: 4px;
-  width: 12px;
-  height: 6px;
-  background: rgba(255, 255, 255, 0.5);
-  border-radius: 50%;
-  transform: rotate(-10deg)
-}
-
-/* FACE */
-.joubot-face {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 2px
-}
-
-.joubot-eyes {
-  display: flex;
-  gap: 7px
-}
-
-.joubot-eye {
-  width: 8px;
-  height: 8px;
-  background: #111;
-  border-radius: 50%;
-  position: relative;
-  transition: transform .1s ease-out
-}
-
-.joubot-eye.blink {
-  transform: scaleY(0.1)
-}
-
-.joubot-pupil {
-  width: 4px;
-  height: 4px;
-  background: #fff;
-  border-radius: 50%;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  transition: transform .06s ease-out
-}
-
-.joubot-eye-shine {
-  position: absolute;
-  top: 1px;
-  right: 1px;
-  width: 2px;
-  height: 2px;
-  background: #fff;
-  border-radius: 50%
-}
-
-.joubot-mouth {
-  width: 6px;
-  height: 3px;
-  border-bottom: 1.5px solid #111;
-  border-radius: 0 0 3px 3px;
-  transition: all .2s
-}
-
-/* EARS */
-.joubot-ear {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 6px;
-  height: 10px;
-  background: #222;
-  border-radius: 3px;
-  border: 1px solid rgba(255, 255, 255, 0.06)
-}
-
-.joubot-ear-l { left: -3px }
-.joubot-ear-r { right: -3px }
-
-/* NECK */
-.joubot-neck {
-  position: absolute;
-  top: 58px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 12px;
-  height: 6px;
-  background: #222;
-  border-radius: 0 0 4px 4px
-}
-
-/* TORSO */
-.joubot-torso {
-  position: absolute;
-  top: 62px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 38px;
-  height: 38px;
-  background: linear-gradient(180deg, #2a2a2a, #1e1e1e);
-  border-radius: 12px 12px 14px 14px;
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3)
-}
-
-.joubot-chest-light {
-  position: absolute;
-  top: 8px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 6px;
-  height: 6px;
-  background: var(--accent);
-  border-radius: 50%;
-  box-shadow: 0 0 6px rgba(232, 232, 232, 0.3);
-  animation: chestBlink 3s ease-in-out infinite
-}
-
-@keyframes chestBlink {
-  0%, 100% { opacity: 0.4 }
-  50% { opacity: 1 }
-}
-
-.joubot-chest-detail {
-  position: absolute;
-  bottom: 8px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 20px;
-  height: 3px;
-  background: rgba(255, 255, 255, 0.06);
-  border-radius: 2px
-}
-
-/* ARMS */
-.joubot-arm {
-  position: absolute;
-  top: 66px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1px;
-  z-index: 3;
-  transform-origin: top center;
-  transition: transform .15s ease-out
-}
-
-.joubot-arm-l {
-  left: -4px
-}
-
-.joubot-arm-r {
-  right: -4px
-}
-
-.joubot-arm-upper {
-  width: 8px;
-  height: 14px;
-  background: #252525;
-  border-radius: 4px
-}
-
-.joubot-arm-joint {
-  width: 6px;
-  height: 6px;
-  background: #1a1a1a;
-  border-radius: 50%
-}
-
-.joubot-arm-lower {
-  width: 7px;
-  height: 12px;
-  background: #222;
-  border-radius: 3px
-}
-
-.joubot-hand {
-  width: 9px;
-  height: 9px;
-  background: var(--accent);
-  border-radius: 50%;
-  box-shadow: 0 1px 4px rgba(232, 232, 232, 0.2)
-}
-
-/* LEGS */
-.joubot-leg {
-  position: absolute;
-  top: 100px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1px;
-  z-index: 2;
-  transform-origin: top center;
-  transition: transform .15s ease-out
-}
-
-.joubot-leg-l { left: 12px }
-.joubot-leg-r { right: 12px }
-
-.joubot-leg-upper {
-  width: 9px;
-  height: 12px;
-  background: #252525;
-  border-radius: 4px
-}
-
-.joubot-leg-joint {
-  width: 6px;
-  height: 6px;
-  background: #1a1a1a;
-  border-radius: 50%
-}
-
-.joubot-leg-lower {
-  width: 8px;
-  height: 10px;
-  background: #222;
-  border-radius: 3px
-}
-
-.joubot-boot {
-  width: 12px;
-  height: 6px;
-  background: var(--accent);
-  border-radius: 3px 3px 5px 5px
-}
-
-/* SHADOW */
-.joubot-shadow {
-  position: absolute;
-  bottom: -4px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 40px;
-  height: 6px;
-  background: radial-gradient(ellipse, rgba(0, 0, 0, 0.3) 0%, transparent 70%);
-  border-radius: 50%;
-  animation: shadowPulse 4s ease-in-out infinite
-}
-
-@keyframes shadowPulse {
-  0%, 100% { transform: translateX(-50%) scaleX(1); opacity: 0.5 }
-  50% { transform: translateX(-50%) scaleX(0.8); opacity: 0.3 }
-}
-
-/* ZZZ */
+/* ZZZ sleep indicator */
 .joubot-zzz {
   position: absolute;
   top: -10px;
@@ -3030,7 +2679,7 @@ img {
 .joubot-zzz span {
   font-family: var(--font-display);
   font-weight: 700;
-  color: var(--accent);
+  color: #a855f7;
   opacity: 0;
   animation: zzzFloat 2s ease-in-out infinite
 }
@@ -3046,189 +2695,6 @@ img {
 }
 
 /* ============================================
-   STATE ANIMATIONS
-   ============================================ */
-
-/* WAVE */
-.state-wave .joubot-arm-r {
-  animation: waveArm 0.6s ease-in-out 3
-}
-
-@keyframes waveArm {
-  0%, 100% { transform: rotate(0deg) }
-  50% { transform: rotate(-40deg) }
-}
-
-/* HAPPY */
-.state-happy .joubot-mouth {
-  width: 8px;
-  height: 4px;
-  border-bottom-width: 2px
-}
-
-.state-happy .joubot-character {
-  animation: happyBounce 0.5s ease-in-out
-}
-
-@keyframes happyBounce {
-  0%, 100% { transform: translateY(0) }
-  50% { transform: translateY(-10px) }
-}
-
-/* EXCITED */
-.state-excited .joubot-character {
-  animation: excitedBounce 0.4s ease-in-out 2
-}
-
-.state-excited .joubot-mouth {
-  width: 7px;
-  height: 5px;
-  border-bottom-width: 2px
-}
-
-@keyframes excitedBounce {
-  0%, 100% { transform: translateY(0) scale(1) }
-  50% { transform: translateY(-14px) scale(1.05) }
-}
-
-/* SURPRISED */
-.state-surprised .joubot-mouth {
-  width: 5px;
-  height: 5px;
-  border: 1.5px solid #111;
-  border-radius: 50%
-}
-
-.state-surprised .joubot-eye {
-  transform: scale(1.2)
-}
-
-/* SLEEPING */
-.state-sleeping .joubot-character {
-  animation: sleepBob 3s ease-in-out infinite
-}
-
-.state-sleeping .joubot-eye {
-  transform: scaleY(0.15)
-}
-
-.state-sleeping .joubot-antenna-tip {
-  animation: none;
-  opacity: 0.3
-}
-
-@keyframes sleepBob {
-  0%, 100% { transform: translateY(0) rotate(0deg) }
-  50% { transform: translateY(-3px) rotate(2deg) }
-}
-
-/* YAWNING */
-.state-yawning .joubot-mouth {
-  width: 7px;
-  height: 7px;
-  border: 1.5px solid #111;
-  border-radius: 50%
-}
-
-.state-yawning .joubot-eye {
-  transform: scaleY(0.3)
-}
-
-/* STRETCHING */
-.state-stretching .joubot-arm-l {
-  animation: stretchLeft 0.8s ease-in-out
-}
-
-.state-stretching .joubot-arm-r {
-  animation: stretchRight 0.8s ease-in-out
-}
-
-@keyframes stretchLeft {
-  0%, 100% { transform: rotate(0deg) }
-  50% { transform: rotate(25deg) }
-}
-
-@keyframes stretchRight {
-  0%, 100% { transform: rotate(0deg) }
-  50% { transform: rotate(-25deg) }
-}
-
-/* POINTING */
-.state-pointing .joubot-arm-r {
-  animation: pointRight 0.5s ease-in-out forwards
-}
-
-@keyframes pointRight {
-  0% { transform: rotate(0deg) }
-  100% { transform: rotate(-50deg) }
-}
-
-/* DANCING */
-.state-dancing .joubot-character {
-  animation: danceSpin 0.8s ease-in-out infinite
-}
-
-.state-dancing .joubot-arm-l {
-  animation: danceArmL 0.4s ease-in-out infinite alternate
-}
-
-.state-dancing .joubot-arm-r {
-  animation: danceArmR 0.4s ease-in-out infinite alternate
-}
-
-@keyframes danceSpin {
-  0% { transform: translateY(0) rotate(0deg) }
-  25% { transform: translateY(-10px) rotate(-5deg) }
-  50% { transform: translateY(0) rotate(0deg) }
-  75% { transform: translateY(-10px) rotate(5deg) }
-  100% { transform: translateY(0) rotate(0deg) }
-}
-
-@keyframes danceArmL {
-  from { transform: rotate(15deg) }
-  to { transform: rotate(-20deg) }
-}
-
-@keyframes danceArmR {
-  from { transform: rotate(-15deg) }
-  to { transform: rotate(20deg) }
-}
-
-/* SITTING */
-.state-sitting .joubot-leg-l,
-.state-sitting .joubot-leg-r {
-  transform: rotate(90deg) translateY(8px)
-}
-
-.state-sitting .joubot-character {
-  animation: none
-}
-
-.state-sitting .joubot-shadow {
-  transform: translateX(-50%) scaleX(1.2)
-}
-
-/* THINKING */
-.state-thinking .joubot-eye-l {
-  animation: thinkLook 2s ease-in-out infinite
-}
-
-@keyframes thinkLook {
-  0%, 100% { transform: translateX(0) }
-  50% { transform: translateX(2px) translateY(-1px) }
-}
-
-/* CURIOUS */
-.state-curious .joubot-head {
-  animation: headTilt 1s ease-in-out infinite alternate
-}
-
-@keyframes headTilt {
-  from { transform: translateX(-50%) rotate(-3deg) }
-  to { transform: translateX(-50%) rotate(3deg) }
-}
-
-/* ============================================
    CHAT BUTTON
    ============================================ */
 
@@ -3238,25 +2704,25 @@ img {
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  background: var(--accent);
-  color: #0a0a0a;
+  background: #a855f7;
+  color: #fff;
   border: none;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  box-shadow: 0 4px 16px rgba(232, 232, 232, 0.2);
+  box-shadow: 0 4px 16px rgba(168, 85, 247, 0.3);
   transition: transform .3s, box-shadow .3s
 }
 
 .joubot-chat-btn:hover {
   transform: scale(1.1);
-  box-shadow: 0 6px 24px rgba(232, 232, 232, 0.3)
+  box-shadow: 0 6px 24px rgba(168, 85, 247, 0.4)
 }
 
 .joubot-chat-btn.active {
   transform: rotate(90deg);
-  background: #e85d3a
+  background: #7c3aed
 }
 
 /* ============================================
@@ -3307,8 +2773,8 @@ img {
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  background: var(--accent);
-  color: #0a0a0a;
+  background: #a855f7;
+  color: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -3440,8 +2906,8 @@ img {
   width: 34px;
   height: 34px;
   border-radius: 10px;
-  background: var(--accent);
-  color: #0a0a0a;
+  background: #a855f7;
+  color: #fff;
   border: none;
   display: flex;
   align-items: center;
@@ -3486,6 +2952,8 @@ img {
 
 @media(max-width: 768px) {
   .joubot-wrapper {
+    bottom: 30px;
+    left: 24px;
     transform: scale(0.85);
     transform-origin: bottom left
   }
@@ -3503,27 +2971,26 @@ img {
 
 @media(max-width: 480px) {
   .joubot-wrapper {
-    transform: scale(0.7)
+    bottom: 20px;
+    left: 16px;
+    transform: scale(0.65);
+    transform-origin: bottom left
   }
 
-  .joubot-speech {
-    max-width: 200px;
-    font-size: 11px
+  #speech {
+    font-size: 13px
   }
 }
 
 /* REDUCED MOTION */
 @media(prefers-reduced-motion: reduce) {
-  .joubot-character,
-  .joubot-antenna-tip,
-  .joubot-chest-light,
   .joubot-shadow,
   .joubot-confetti,
   .joubot-zzz span {
     animation: none !important
   }
 
-  .joubot-speech,
+  #speech,
   .joubot-chat-panel,
   .joubot-chat-msg {
     transition-duration: 0.01ms !important
