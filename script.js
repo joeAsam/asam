@@ -162,20 +162,9 @@ form.addEventListener('submit', function(e) {
     btn.classList.remove('loading');
     btn.classList.add('success');
     this.reset();
+    document.dispatchEvent(new CustomEvent('contact-form-success'));
     setTimeout(() => { btn.classList.remove('success'); }, 2500);
   }, 1500);
-});
-
-// PARALLAX HERO
-window.addEventListener('scroll', () => {
-  const scrolled = window.scrollY;
-  const heroImage = document.querySelector('.hero-image-wrapper');
-  if (heroImage && scrolled < window.innerHeight) {
-    const isMobile = window.innerWidth <= 1024;
-    if (!isMobile) {
-      heroImage.style.transform = `translateY(${scrolled * 0.12}px)`;
-    }
-  }
 });
 
 // TILT EFFECT ON PROJECTS

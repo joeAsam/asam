@@ -698,59 +698,6 @@ img {
   }
 }
 
-.hero-image-wrapper {
-  width: 380px;
-  height: 380px;
-  flex-shrink: 0;
-  z-index: 1;
-  position: relative
-}
-
-.hero-image-ring {
-  position: absolute;
-  inset: -12px;
-  border-radius: 50%
-}
-
-.hero-ring-segment {
-  position: absolute;
-  inset: 0;
-  border-radius: 50%;
-  border: 2px solid transparent
-}
-
-.hero-ring-1 {
-  border-top-color: var(--accent);
-  border-right-color: var(--accent);
-  animation: ringRotate 8s linear infinite
-}
-
-.hero-ring-2 {
-  border-bottom-color: rgba(255, 255, 255, 0.15);
-  border-left-color: rgba(255, 255, 255, 0.15);
-  animation: ringRotate 12s linear infinite reverse
-}
-
-@keyframes ringRotate {
-  from { transform: rotate(0deg) }
-  to { transform: rotate(360deg) }
-}
-
-.hero-image {
-  width: 100%;
-  height: 100%;
-  position: relative;
-  overflow: hidden;
-  border-radius: 50%;
-  transition: transform .4s var(--ease-out-expo)
-}
-
-.hero-image-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, transparent 40%, rgba(0, 0, 0, 0.6) 100%)
-}
-
 /* MARQUEE */
 .marquee-section {
   padding: 20px 0;
@@ -1887,11 +1834,6 @@ img {
     gap: 40px
   }
 
-  .hero-image-wrapper {
-    width: 280px;
-    height: 380px
-  }
-
   .section {
     padding: 80px 32px
   }
@@ -1962,38 +1904,79 @@ img {
 
   .hero {
     padding: 100px 20px 48px;
-    gap: 32px;
+    gap: 28px;
     flex-direction: column-reverse;
-    text-align: center
+    text-align: center;
+    min-height: auto
   }
 
   .hero-tag {
-    justify-content: center
+    justify-content: center;
+    font-size: 9px;
+    letter-spacing: 2px;
+    gap: 10px;
+    margin-bottom: 24px
+  }
+
+  .hero-tag-line {
+    width: 24px
   }
 
   .hero-title {
+    font-size: clamp(36px, 10vw, 52px);
     letter-spacing: -2px
   }
 
   .hero-subtitle {
-    max-width: 100%
+    max-width: 100%;
+    font-size: 14px;
+    line-height: 1.6;
+    margin-top: 20px
   }
 
   .hero-actions {
-    justify-content: center
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    margin-top: 28px
+  }
+
+  .hero-cta,
+  .hero-cta-outline {
+    width: 100%;
+    max-width: 260px;
+    justify-content: center;
+    padding: 12px 24px;
+    font-size: 12px
   }
 
   .hero-stats {
-    justify-content: center
+    justify-content: center;
+    gap: 20px;
+    margin-top: 32px
+  }
+
+  .hero-stat-number {
+    font-size: 24px
+  }
+
+  .hero-stat-label {
+    font-size: 10px;
+    letter-spacing: 1px
+  }
+
+  .hero-stat-divider {
+    height: 28px
   }
 
   .hero-bottom {
-    justify-content: center
+    justify-content: center;
+    margin-top: 32px
   }
 
-  .hero-image-wrapper {
-    width: 200px;
-    height: 200px
+  .hero-content {
+    max-width: 100%
   }
 
   .hero-scroll {
@@ -2191,15 +2174,6 @@ img {
 
   .hero-location {
     font-size: 12px
-  }
-
-  .hero-image-wrapper {
-    width: 200px;
-    height: 270px
-  }
-
-  .hero-image {
-    border-radius: 140px 140px 16px 16px
   }
 
   .section {
@@ -2586,5 +2560,972 @@ img {
   .lightbox-counter {
     bottom: 16px;
     font-size: 12px
+  }
+}
+
+/* ============================================
+   JOEBOT MASCOT
+   ============================================ */
+
+.joubot-wrapper {
+  position: fixed;
+  z-index: 998;
+  bottom: 40px;
+  left: 40px;
+  user-select: none;
+  -webkit-user-select: none;
+  cursor: grab;
+  touch-action: none
+}
+
+.joubot-wrapper.dragging {
+  cursor: grabbing;
+  transition: none
+}
+
+.joubot-wrapper.dragging .joubot-character {
+  animation-play-state: paused !important
+}
+
+/* SPEECH BUBBLE */
+.joubot-speech {
+  position: absolute;
+  bottom: calc(100% + 14px);
+  left: 0;
+  background: rgba(20, 20, 20, 0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity .35s, transform .35s;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  pointer-events: none;
+  max-width: 260px
+}
+
+.joubot-speech.visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto
+}
+
+.joubot-speech.fade-out {
+  opacity: 0;
+  transform: translateY(-4px)
+}
+
+.joubot-speech-text {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.85);
+  letter-spacing: 0.3px;
+  line-height: 1.4
+}
+
+.joubot-speech-close {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.35);
+  font-size: 15px;
+  cursor: pointer;
+  padding: 0 2px;
+  line-height: 1;
+  transition: color .2s;
+  flex-shrink: 0
+}
+
+.joubot-speech-close:hover {
+  color: #fff
+}
+
+/* CHARACTER */
+.joubot-character {
+  position: relative;
+  width: 90px;
+  height: 140px;
+  animation: joubotFloat 4s ease-in-out infinite
+}
+
+.joubot-body-group {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform .15s ease-out;
+  transform-origin: center bottom
+}
+
+@keyframes joubotFloat {
+  0%, 100% { transform: translateY(0) }
+  50% { transform: translateY(-6px) }
+}
+
+/* GLOW */
+.joubot-glow {
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 20px;
+  background: radial-gradient(ellipse, rgba(232, 93, 58, 0.15) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+  transition: opacity .3s
+}
+
+/* ANTENNA */
+.joubot-antenna {
+  position: absolute;
+  top: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 5
+}
+
+.joubot-antenna-stem {
+  width: 2px;
+  height: 10px;
+  background: rgba(232, 232, 232, 0.3)
+}
+
+.joubot-antenna-tip {
+  width: 8px;
+  height: 8px;
+  background: var(--accent);
+  border-radius: 50%;
+  box-shadow: 0 0 8px rgba(232, 232, 232, 0.4);
+  animation: antennaPulse 2s ease-in-out infinite
+}
+
+@keyframes antennaPulse {
+  0%, 100% { box-shadow: 0 0 4px rgba(232, 232, 232, 0.3); transform: scale(1) }
+  50% { box-shadow: 0 0 12px rgba(232, 232, 232, 0.6); transform: scale(1.1) }
+}
+
+/* HEAD */
+.joubot-head {
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 52px;
+  height: 52px;
+  z-index: 4
+}
+
+.joubot-helmet {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
+  border-radius: 50%;
+  position: relative;
+  border: 1.5px solid rgba(255, 255, 255, 0.08);
+  box-shadow:
+    inset 0 -3px 6px rgba(0, 0, 0, 0.3),
+    0 4px 12px rgba(0, 0, 0, 0.3)
+}
+
+.joubot-helmet-shine {
+  position: absolute;
+  top: 7px;
+  left: 10px;
+  width: 16px;
+  height: 10px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 50%;
+  transform: rotate(-20deg)
+}
+
+/* VISOR */
+.joubot-visor {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 36px;
+  height: 26px;
+  background: #f5f5f5;
+  border-radius: 14px;
+  overflow: hidden
+}
+
+.joubot-visor-glare {
+  position: absolute;
+  top: 3px;
+  left: 4px;
+  width: 12px;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  transform: rotate(-10deg)
+}
+
+/* FACE */
+.joubot-face {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px
+}
+
+.joubot-eyes {
+  display: flex;
+  gap: 7px
+}
+
+.joubot-eye {
+  width: 8px;
+  height: 8px;
+  background: #111;
+  border-radius: 50%;
+  position: relative;
+  transition: transform .1s ease-out
+}
+
+.joubot-eye.blink {
+  transform: scaleY(0.1)
+}
+
+.joubot-pupil {
+  width: 4px;
+  height: 4px;
+  background: #fff;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: transform .06s ease-out
+}
+
+.joubot-eye-shine {
+  position: absolute;
+  top: 1px;
+  right: 1px;
+  width: 2px;
+  height: 2px;
+  background: #fff;
+  border-radius: 50%
+}
+
+.joubot-mouth {
+  width: 6px;
+  height: 3px;
+  border-bottom: 1.5px solid #111;
+  border-radius: 0 0 3px 3px;
+  transition: all .2s
+}
+
+/* EARS */
+.joubot-ear {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 6px;
+  height: 10px;
+  background: #222;
+  border-radius: 3px;
+  border: 1px solid rgba(255, 255, 255, 0.06)
+}
+
+.joubot-ear-l { left: -3px }
+.joubot-ear-r { right: -3px }
+
+/* NECK */
+.joubot-neck {
+  position: absolute;
+  top: 58px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 12px;
+  height: 6px;
+  background: #222;
+  border-radius: 0 0 4px 4px
+}
+
+/* TORSO */
+.joubot-torso {
+  position: absolute;
+  top: 62px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 38px;
+  height: 38px;
+  background: linear-gradient(180deg, #2a2a2a, #1e1e1e);
+  border-radius: 12px 12px 14px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3)
+}
+
+.joubot-chest-light {
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 6px;
+  height: 6px;
+  background: var(--accent);
+  border-radius: 50%;
+  box-shadow: 0 0 6px rgba(232, 232, 232, 0.3);
+  animation: chestBlink 3s ease-in-out infinite
+}
+
+@keyframes chestBlink {
+  0%, 100% { opacity: 0.4 }
+  50% { opacity: 1 }
+}
+
+.joubot-chest-detail {
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 2px
+}
+
+/* ARMS */
+.joubot-arm {
+  position: absolute;
+  top: 66px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+  z-index: 3;
+  transform-origin: top center;
+  transition: transform .15s ease-out
+}
+
+.joubot-arm-l {
+  left: -4px
+}
+
+.joubot-arm-r {
+  right: -4px
+}
+
+.joubot-arm-upper {
+  width: 8px;
+  height: 14px;
+  background: #252525;
+  border-radius: 4px
+}
+
+.joubot-arm-joint {
+  width: 6px;
+  height: 6px;
+  background: #1a1a1a;
+  border-radius: 50%
+}
+
+.joubot-arm-lower {
+  width: 7px;
+  height: 12px;
+  background: #222;
+  border-radius: 3px
+}
+
+.joubot-hand {
+  width: 9px;
+  height: 9px;
+  background: var(--accent);
+  border-radius: 50%;
+  box-shadow: 0 1px 4px rgba(232, 232, 232, 0.2)
+}
+
+/* LEGS */
+.joubot-leg {
+  position: absolute;
+  top: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+  z-index: 2;
+  transform-origin: top center;
+  transition: transform .15s ease-out
+}
+
+.joubot-leg-l { left: 12px }
+.joubot-leg-r { right: 12px }
+
+.joubot-leg-upper {
+  width: 9px;
+  height: 12px;
+  background: #252525;
+  border-radius: 4px
+}
+
+.joubot-leg-joint {
+  width: 6px;
+  height: 6px;
+  background: #1a1a1a;
+  border-radius: 50%
+}
+
+.joubot-leg-lower {
+  width: 8px;
+  height: 10px;
+  background: #222;
+  border-radius: 3px
+}
+
+.joubot-boot {
+  width: 12px;
+  height: 6px;
+  background: var(--accent);
+  border-radius: 3px 3px 5px 5px
+}
+
+/* SHADOW */
+.joubot-shadow {
+  position: absolute;
+  bottom: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 6px;
+  background: radial-gradient(ellipse, rgba(0, 0, 0, 0.3) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: shadowPulse 4s ease-in-out infinite
+}
+
+@keyframes shadowPulse {
+  0%, 100% { transform: translateX(-50%) scaleX(1); opacity: 0.5 }
+  50% { transform: translateX(-50%) scaleX(0.8); opacity: 0.3 }
+}
+
+/* ZZZ */
+.joubot-zzz {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .4s
+}
+
+.joubot-zzz.visible {
+  opacity: 1
+}
+
+.joubot-zzz span {
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--accent);
+  opacity: 0;
+  animation: zzzFloat 2s ease-in-out infinite
+}
+
+.joubot-zzz span:nth-child(1) { font-size: 10px; animation-delay: 0s }
+.joubot-zzz span:nth-child(2) { font-size: 13px; animation-delay: 0.3s }
+.joubot-zzz span:nth-child(3) { font-size: 16px; animation-delay: 0.6s }
+
+@keyframes zzzFloat {
+  0% { opacity: 0; transform: translateY(0) translateX(0) }
+  30% { opacity: 1 }
+  100% { opacity: 0; transform: translateY(-16px) translateX(8px) }
+}
+
+/* ============================================
+   STATE ANIMATIONS
+   ============================================ */
+
+/* WAVE */
+.state-wave .joubot-arm-r {
+  animation: waveArm 0.6s ease-in-out 3
+}
+
+@keyframes waveArm {
+  0%, 100% { transform: rotate(0deg) }
+  50% { transform: rotate(-40deg) }
+}
+
+/* HAPPY */
+.state-happy .joubot-mouth {
+  width: 8px;
+  height: 4px;
+  border-bottom-width: 2px
+}
+
+.state-happy .joubot-character {
+  animation: happyBounce 0.5s ease-in-out
+}
+
+@keyframes happyBounce {
+  0%, 100% { transform: translateY(0) }
+  50% { transform: translateY(-10px) }
+}
+
+/* EXCITED */
+.state-excited .joubot-character {
+  animation: excitedBounce 0.4s ease-in-out 2
+}
+
+.state-excited .joubot-mouth {
+  width: 7px;
+  height: 5px;
+  border-bottom-width: 2px
+}
+
+@keyframes excitedBounce {
+  0%, 100% { transform: translateY(0) scale(1) }
+  50% { transform: translateY(-14px) scale(1.05) }
+}
+
+/* SURPRISED */
+.state-surprised .joubot-mouth {
+  width: 5px;
+  height: 5px;
+  border: 1.5px solid #111;
+  border-radius: 50%
+}
+
+.state-surprised .joubot-eye {
+  transform: scale(1.2)
+}
+
+/* SLEEPING */
+.state-sleeping .joubot-character {
+  animation: sleepBob 3s ease-in-out infinite
+}
+
+.state-sleeping .joubot-eye {
+  transform: scaleY(0.15)
+}
+
+.state-sleeping .joubot-antenna-tip {
+  animation: none;
+  opacity: 0.3
+}
+
+@keyframes sleepBob {
+  0%, 100% { transform: translateY(0) rotate(0deg) }
+  50% { transform: translateY(-3px) rotate(2deg) }
+}
+
+/* YAWNING */
+.state-yawning .joubot-mouth {
+  width: 7px;
+  height: 7px;
+  border: 1.5px solid #111;
+  border-radius: 50%
+}
+
+.state-yawning .joubot-eye {
+  transform: scaleY(0.3)
+}
+
+/* STRETCHING */
+.state-stretching .joubot-arm-l {
+  animation: stretchLeft 0.8s ease-in-out
+}
+
+.state-stretching .joubot-arm-r {
+  animation: stretchRight 0.8s ease-in-out
+}
+
+@keyframes stretchLeft {
+  0%, 100% { transform: rotate(0deg) }
+  50% { transform: rotate(25deg) }
+}
+
+@keyframes stretchRight {
+  0%, 100% { transform: rotate(0deg) }
+  50% { transform: rotate(-25deg) }
+}
+
+/* POINTING */
+.state-pointing .joubot-arm-r {
+  animation: pointRight 0.5s ease-in-out forwards
+}
+
+@keyframes pointRight {
+  0% { transform: rotate(0deg) }
+  100% { transform: rotate(-50deg) }
+}
+
+/* DANCING */
+.state-dancing .joubot-character {
+  animation: danceSpin 0.8s ease-in-out infinite
+}
+
+.state-dancing .joubot-arm-l {
+  animation: danceArmL 0.4s ease-in-out infinite alternate
+}
+
+.state-dancing .joubot-arm-r {
+  animation: danceArmR 0.4s ease-in-out infinite alternate
+}
+
+@keyframes danceSpin {
+  0% { transform: translateY(0) rotate(0deg) }
+  25% { transform: translateY(-10px) rotate(-5deg) }
+  50% { transform: translateY(0) rotate(0deg) }
+  75% { transform: translateY(-10px) rotate(5deg) }
+  100% { transform: translateY(0) rotate(0deg) }
+}
+
+@keyframes danceArmL {
+  from { transform: rotate(15deg) }
+  to { transform: rotate(-20deg) }
+}
+
+@keyframes danceArmR {
+  from { transform: rotate(-15deg) }
+  to { transform: rotate(20deg) }
+}
+
+/* SITTING */
+.state-sitting .joubot-leg-l,
+.state-sitting .joubot-leg-r {
+  transform: rotate(90deg) translateY(8px)
+}
+
+.state-sitting .joubot-character {
+  animation: none
+}
+
+.state-sitting .joubot-shadow {
+  transform: translateX(-50%) scaleX(1.2)
+}
+
+/* THINKING */
+.state-thinking .joubot-eye-l {
+  animation: thinkLook 2s ease-in-out infinite
+}
+
+@keyframes thinkLook {
+  0%, 100% { transform: translateX(0) }
+  50% { transform: translateX(2px) translateY(-1px) }
+}
+
+/* CURIOUS */
+.state-curious .joubot-head {
+  animation: headTilt 1s ease-in-out infinite alternate
+}
+
+@keyframes headTilt {
+  from { transform: translateX(-50%) rotate(-3deg) }
+  to { transform: translateX(-50%) rotate(3deg) }
+}
+
+/* ============================================
+   CHAT BUTTON
+   ============================================ */
+
+.joubot-chat-btn {
+  position: fixed;
+  z-index: 997;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #0a0a0a;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(232, 232, 232, 0.2);
+  transition: transform .3s, box-shadow .3s
+}
+
+.joubot-chat-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 24px rgba(232, 232, 232, 0.3)
+}
+
+.joubot-chat-btn.active {
+  transform: rotate(90deg);
+  background: #e85d3a
+}
+
+/* ============================================
+   CHAT PANEL
+   ============================================ */
+
+.joubot-chat-panel {
+  position: fixed;
+  z-index: 996;
+  width: 340px;
+  max-height: 480px;
+  background: rgba(14, 14, 14, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(12px) scale(0.95);
+  pointer-events: none;
+  transition: opacity .3s, transform .3s;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.5)
+}
+
+.joubot-chat-panel.open {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto
+}
+
+.joubot-chat-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06)
+}
+
+.joubot-chat-header-info {
+  display: flex;
+  align-items: center;
+  gap: 10px
+}
+
+.joubot-chat-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #0a0a0a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.5px
+}
+
+.joubot-chat-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: #fff
+}
+
+.joubot-chat-status {
+  font-size: 10px;
+  color: #6ee7a0
+}
+
+.joubot-chat-close {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 20px;
+  cursor: pointer;
+  padding: 4px;
+  line-height: 1;
+  transition: color .2s
+}
+
+.joubot-chat-close:hover {
+  color: #fff
+}
+
+.joubot-chat-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: 300px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.1) transparent
+}
+
+.joubot-chat-msg {
+  max-width: 85%;
+  padding: 10px 14px;
+  border-radius: 12px;
+  font-size: 12px;
+  line-height: 1.5;
+  animation: msgIn .3s ease-out
+}
+
+@keyframes msgIn {
+  from { opacity: 0; transform: translateY(6px) }
+  to { opacity: 1; transform: translateY(0) }
+}
+
+.joubot-chat-msg-bot {
+  align-self: flex-start;
+  background: rgba(255, 255, 255, 0.06);
+  color: rgba(255, 255, 255, 0.85);
+  border-bottom-left-radius: 4px
+}
+
+.joubot-chat-msg-user {
+  align-self: flex-end;
+  background: var(--accent);
+  color: #0a0a0a;
+  border-bottom-right-radius: 4px
+}
+
+.joubot-chat-suggestions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 0 16px 12px
+}
+
+.joubot-suggestion {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 10px;
+  padding: 5px 10px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all .2s;
+  font-family: inherit
+}
+
+.joubot-suggestion:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.15)
+}
+
+.joubot-chat-input-area {
+  display: flex;
+  gap: 8px;
+  padding: 12px 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06)
+}
+
+.joubot-chat-input {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  padding: 8px 12px;
+  color: #fff;
+  font-size: 12px;
+  font-family: inherit;
+  outline: none;
+  transition: border-color .2s
+}
+
+.joubot-chat-input::placeholder {
+  color: rgba(255, 255, 255, 0.3)
+}
+
+.joubot-chat-input:focus {
+  border-color: rgba(255, 255, 255, 0.15)
+}
+
+.joubot-chat-send {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background: var(--accent);
+  color: #0a0a0a;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform .2s;
+  flex-shrink: 0
+}
+
+.joubot-chat-send:hover {
+  transform: scale(1.05)
+}
+
+/* ============================================
+   CONFETTI
+   ============================================ */
+
+.joubot-confetti {
+  position: fixed;
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+  z-index: 9999;
+  pointer-events: none;
+  animation: confettiFall 3s ease-out forwards
+}
+
+@keyframes confettiFall {
+  0% { opacity: 1; transform: translateY(0) rotate(0deg) scale(1) }
+  100% { opacity: 0; transform: translateY(100vh) rotate(720deg) scale(0.5) }
+}
+
+/* ============================================
+   RESPONSIVE — JOEBOT
+   ============================================ */
+
+@media(max-width: 1024px) {
+  .joubot-chat-panel {
+    width: 300px
+  }
+}
+
+@media(max-width: 768px) {
+  .joubot-wrapper {
+    transform: scale(0.85);
+    transform-origin: bottom left
+  }
+
+  .joubot-chat-btn {
+    width: 42px;
+    height: 42px
+  }
+
+  .joubot-chat-panel {
+    width: auto;
+    max-height: 400px
+  }
+}
+
+@media(max-width: 480px) {
+  .joubot-wrapper {
+    transform: scale(0.7)
+  }
+
+  .joubot-speech {
+    max-width: 200px;
+    font-size: 11px
+  }
+}
+
+/* REDUCED MOTION */
+@media(prefers-reduced-motion: reduce) {
+  .joubot-character,
+  .joubot-antenna-tip,
+  .joubot-chest-light,
+  .joubot-shadow,
+  .joubot-confetti,
+  .joubot-zzz span {
+    animation: none !important
+  }
+
+  .joubot-speech,
+  .joubot-chat-panel,
+  .joubot-chat-msg {
+    transition-duration: 0.01ms !important
   }
 }
