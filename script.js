@@ -179,39 +179,26 @@ function animateScroll(timestamp) {
   }
 }
 
-// Wheel smooth scroll
-var wheelAccumulator = 0;
-var wheelTimer = null;
+// Wheel smooth scroll (desktop only)
+if (!('ontouchstart' in window)) {
+  var wheelAccumulator = 0;
+  var wheelTimer = null;
 
-document.addEventListener('wheel', function(e) {
-  e.preventDefault();
-  var delta = e.deltaY;
-  var maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-  var current = window.scrollY;
+  document.addEventListener('wheel', function(e) {
+    e.preventDefault();
+    var delta = e.deltaY;
+    var maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+    var current = window.scrollY;
 
-  wheelAccumulator += delta;
-  clearTimeout(wheelTimer);
-  wheelTimer = setTimeout(function() { wheelAccumulator = 0; }, 80);
+    wheelAccumulator += delta;
+    clearTimeout(wheelTimer);
+    wheelTimer = setTimeout(function() { wheelAccumulator = 0; }, 80);
 
-  var target = current + wheelAccumulator * 1.5;
-  target = Math.max(0, Math.min(target, maxScroll));
-  smoothScrollTo(target, 900);
-}, { passive: false });
-
-// Touch smooth scroll
-var touchStartY = 0;
-document.addEventListener('touchstart', function(e) {
-  touchStartY = e.touches[0].clientY;
-}, { passive: true });
-
-document.addEventListener('touchmove', function(e) {
-  var touchY = e.touches[0].clientY;
-  var delta = touchStartY - touchY;
-  touchStartY = touchY;
-  var maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-  var target = Math.max(0, Math.min(window.scrollY + delta * 2.5, maxScroll));
-  smoothScrollTo(target, 700);
-}, { passive: true });
+    var target = current + wheelAccumulator * 1.5;
+    target = Math.max(0, Math.min(target, maxScroll));
+    smoothScrollTo(target, 900);
+  }, { passive: false });
+}
 
 // Nav link smooth scroll
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
