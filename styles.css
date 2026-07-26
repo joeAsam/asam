@@ -2586,7 +2586,7 @@ img {
 .joubot-character {
   position: relative;
   width: 192px;
-  height: 208px;
+  height: 192px;
   transform-origin: center center;
   transition: transform .005s linear;
   transform: scale(0.55);
